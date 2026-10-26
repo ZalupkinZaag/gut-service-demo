@@ -213,7 +213,7 @@ export default function App() {
               Услуги
             </h2>
             <p className="text-xs uppercase tracking-widest text-muted-foreground">
-              прайс и длительность из бизнес-конфига студии
+              демо-прайс: поставим ваши цены и услуги
             </p>
           </Reveal>
 
