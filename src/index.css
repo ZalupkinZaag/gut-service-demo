@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --radius: 0rem; /* DS SGX Detailing Site: sharp corners */
+}
+
+/*
+  Design system: SGX Detailing Site (ui-ux-pro-max, --design-system, generated 2026-10-26)
+  Source of truth: design-system/sgx-detailing-site/MASTER.md
+  All values below are tokens from MASTER.md (dark mode palette).
+*/
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  /* Color palette (MASTER.md; primary mapped to the DS Accent/CTA slot for dark bg legibility) */
+  --color-background: #000000;
+  --color-foreground: #fafafa;
+  --color-card: #0c0c0c;
+  --color-card-foreground: #fafafa;
+  --color-primary: #f8fafc;      /* DS Accent/CTA #F8FAFC */
+  --color-primary-foreground: #0f172a; /* DS On Accent/CTA */
+  --color-secondary: #27272a;    /* DS Secondary */
+  --color-secondary-foreground: #ffffff;
+  --color-muted: #181818;        /* DS Muted */
+  --color-muted-foreground: #94a3b8;
+  --color-accent: #18181b;       /* DS Primary #18181B (panel tone) */
+  --color-accent-foreground: #ffffff;
+  --color-destructive: #ef4444;  /* DS Destructive */
+  --color-destructive-foreground: #000000;
+  --color-border: #3f3f46;       /* DS Border */
+  --color-input: #3f3f46;
+  --color-ring: #ffffff;         /* DS Ring */
+
+  --radius-lg: var(--radius);
+  --radius-md: var(--radius);
+  --radius-sm: var(--radius);
+}
+
+/* Spacing scale tokens from MASTER.md (named --space-* to avoid clobbering
+   Tailwind's own spacing scale used by max-w-*, gap-* etc.) */
+:root {
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+}
+
+@theme inline {
+  --color-popover: var(--color-card);
+  --color-popover-foreground: var(--color-card-foreground);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  * {
+    @apply border-border;
+  }
+  /* DS: visible focus states for a11y */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* DS style "Motion-Driven": Micro interactions
+   Scroll reveal via IntersectionObserver (see src/lib/reveal.tsx).
+   Disabled under prefers-reduced-motion — elements shown in final state. */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 400ms ease,
+    transform 400ms ease;
+}
+.reveal-done {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init,
+  .reveal-done {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Fine grain texture for photo placeholder panels (built with DS tokens only) */
+.photo-grain {
+  background-image:
+    repeating-linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--color-border) 18%, transparent) 0 1px,
+      transparent 1px 14px
+    );
+}

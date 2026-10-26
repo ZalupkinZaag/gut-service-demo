@@ -1,0 +1,15 @@
+{
+  "id": "gut-service",
+  "name": "Gut service",
+  "tagline": "Детейлинг-студия",
+  "phone": "+7 912 881-04-74",
+  "address": "Пермь, ул. Полазненская, 4",
+  "workingHours": { "start": 10, "end": 19 },
+  "worksOnWeekend": false,
+  "services": [
+    { "name": "Комплексная мойка", "price": 1500, "duration": 120, "description": "Кузовное покрытие, чистка колёсных арок" },
+    { "name": "Керамсинг", "price": 25000, "duration": 540, "description": "Керамика 2 слоя, броне-рулон 4 навала" },
+    { "name": "Полировка кузова", "price": 8900, "duration": 480, "description": "ОБС 2 пасса + префорс" },
+    { "name": "Химчистка салона", "price": 8000, "duration": 360, "description": "Три патч, потолок, стёкла" }
+  ]
+}
