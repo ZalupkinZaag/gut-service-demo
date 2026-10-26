@@ -8,7 +8,8 @@ import {
 } from "@/lib/bookings";
 import { formatPrice, formatDate } from "@/lib/utils";
 import { Reveal } from "@/lib/reveal";
-import { BeforeAfter } from "@/components/site/BeforeAfter";
+import { HeroPhotoWall, Gallery } from "@/components/site/PhotoWall";
+import { heroBackdrop } from "@/config/photos";
 import { Reviews } from "@/components/site/Reviews";
 import { Cabinet } from "@/components/site/Cabinet";
 import {
@@ -35,6 +36,7 @@ import {
   Clock,
   MapPin,
   Phone,
+  Star,
 } from "lucide-react";
 
 export default function App() {
@@ -113,6 +115,12 @@ export default function App() {
           <nav className="flex items-center gap-5 text-xs uppercase tracking-widest">
             <a
               className="hidden cursor-pointer text-muted-foreground transition-colors duration-200 hover:text-foreground sm:block"
+              href="#works"
+            >
+              Работы
+            </a>
+            <a
+              className="hidden cursor-pointer text-muted-foreground transition-colors duration-200 hover:text-foreground sm:block"
               href="#services"
             >
               Услуги
@@ -140,9 +148,20 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero: асимметрия 7/5 — слева крупная типографика, справа фото до/после */}
-      <section id="top" className="border-b border-border">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-14 pt-12 sm:pb-20 sm:pt-16 md:grid-cols-12 md:gap-8 md:pt-20">
+      {/* Hero: асимметрия 7/5 — слева крупная типографика, справа реальные фото студии;
+          фон — фасад студии из карточки 2ГИС под чёрным градиентом */}
+      <section id="top" className="relative isolate overflow-hidden border-b border-border">
+        <img
+          src={heroBackdrop}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 z-0 h-full w-full object-cover object-center opacity-35"
+        />
+        <div
+          className="absolute inset-0 z-0 bg-gradient-to-b from-background/85 via-background/70 to-background"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 pb-14 pt-12 sm:pb-20 sm:pt-16 md:grid-cols-12 md:gap-8 md:pt-20">
           <div className="md:col-span-7">
             <Reveal>
               <p className="mb-6 text-[10px] uppercase tracking-[0.2em] break-words text-muted-foreground sm:text-xs sm:tracking-[0.35em]">
@@ -155,6 +174,15 @@ export default function App() {
                 </span>
               </h1>
             </Reveal>
+            {business.rating2gis && (
+              <Reveal delayMs={50}>
+                <p className="mt-5 inline-flex items-center gap-2 border border-border bg-background/70 px-3 py-1.5 text-xs uppercase tracking-widest text-muted-foreground backdrop-blur-sm">
+                  <Star className="size-3.5 text-foreground" aria-hidden />
+                  {"Рейтинг "}{business.rating2gis.score.toFixed(1)}
+                  {" · "}{business.rating2gis.count}{" отзывов в 2ГИС"}
+                </p>
+              </Reveal>
+            )}
             <Reveal delayMs={80}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button
@@ -181,7 +209,7 @@ export default function App() {
           </div>
 
           <Reveal delayMs={120} className="md:col-span-5">
-            <BeforeAfter />
+            <HeroPhotoWall />
           </Reveal>
 
           <Reveal
@@ -203,6 +231,19 @@ export default function App() {
             </span>
           </Reveal>
         </div>
+      </section>
+
+      {/* Работы: реальные фото студии из карточки 2ГИС (см. src/config/photos.ts) */}
+      <section id="works" className="border-b border-border">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-baseline gap-x-6 gap-y-2 px-4 pb-4 pt-12 sm:pt-16 md:pt-20">
+          <h2 className="font-display text-4xl font-extrabold tracking-tight uppercase sm:text-5xl">
+            Работы
+          </h2>
+          <p className="text-xs uppercase tracking-widest text-muted-foreground">
+            студия изнутри · снимки из карточки 2ГИС
+          </p>
+        </div>
+        <Gallery />
       </section>
 
       {/* Услуги: редакторский прайс-лист строками, не «3 карточки по центру» */}
@@ -289,9 +330,9 @@ export default function App() {
             </span>
           </div>
           <p className="w-full max-w-xs text-xs leading-relaxed text-muted-foreground">
-            Демо-версия сайта онлайн-записи: прайс, часы работы и фото — заглушки
-            (отзывы помечены «demo»), адрес и телефон — из карточки 2ГИС.
-            Тестовая ссылка, для обсуждения.
+            Демо-версия сайта онлайн-записи: прайс, часы работы и отзывы —
+            заглушки, фото — из открытой карточки 2ГИС, адрес и телефон — оттуда
+            же. Тестовая ссылка, для обсуждения.
           </p>
         </div>
       </footer>

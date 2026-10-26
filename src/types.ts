@@ -14,3 +14,9 @@ export type Booking = {
   phone: string;
   createdAt: number;
 };
+
+/** Реальный рейтинг из карточки 2ГИС (факт выгрузки), не демо. */
+export type Rating2gis = {
+  score: number;
+  count: number;
+};

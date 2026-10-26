@@ -4,6 +4,7 @@
   "tagline": "Детейлинг-студия",
   "phone": "+7 912 881-04-74",
   "address": "Пермь, ул. Полазненская, 4",
+  "rating2gis": { "score": 5, "count": 69 },
   "workingHours": { "start": 10, "end": 19 },
   "worksOnWeekend": false,
   "services": [
